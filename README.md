@@ -1,18 +1,26 @@
-# show-math
+# skills
 
-An agent skill that shows math in [T3 Code](https://github.com/pingdotgg/t3code). T3 chat doesn't render LaTeX, so formulas show up as raw source. This skill has the agent put its math on a small HTML page typeset with KaTeX, which T3 Code shows inline above the reply. The reply itself stays plain prose.
+Agent skills I use with [T3 Code](https://github.com/pingdotgg/t3code), Claude Code, and Codex.
 
-## Install
+Install all of them:
 
 ```sh
-npx skills add hkarlsen06/show-math
+npx skills add hkarlsen06/skills
 ```
 
-Or copy `skills/show-math/SKILL.md` to `~/.claude/skills/show-math/` (Claude Code) or `~/.agents/skills/show-math/` (Codex and other agents).
+Or one by name, with `--skill <name>`. To install by hand, copy a skill's folder to `~/.claude/skills/` (Claude Code) or `~/.agents/skills/` (Codex and other agents).
 
-The agent uses the skill on its own when a reply needs an equation, derivation, matrix, or other notation. You can also ask for it by name.
+## show-math
 
-## How it works
+```sh
+npx skills add hkarlsen06/skills --skill show-math
+```
+
+Shows math in T3 Code. T3 chat doesn't render LaTeX, so formulas show up as raw source. With this skill, the agent puts its math on a small HTML page typeset with KaTeX, and T3 Code shows that page inline above the reply. The reply itself stays plain prose.
+
+The agent uses it on its own when a reply needs an equation, derivation, matrix, or other notation. You can also ask for it by name.
+
+How it works:
 
 1. The agent loads `html_render` from T3 Code's built-in `t3-code` MCP server.
 2. It fills a fixed template with its formulas: `$$…$$` for display math, `\(…\)` for inline math, each with a short label.
@@ -21,6 +29,4 @@ The agent uses the skill on its own when a reply needs an equation, derivation, 
 
 Plots and diagrams can go on the same page as inline SVG.
 
-## Requirements
-
-T3 Code with the `html_render` tool, so the agent has to run inside T3 Code. Elsewhere the skill has nothing to render with.
+It needs the `html_render` tool, so the agent has to run inside T3 Code.
